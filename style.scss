@@ -1,0 +1,141 @@
+$gutter:30px;
+$primary-font: "Poppins", sans-serif;
+$background-color:#fefefe;
+$clr-1:#ffb139;
+$clr-2:#6f69ac;
+$clr-3:#80ed99;
+
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $primary-font;
+    background-color: $background-color;
+}
+
+.pricing {
+    padding: 100px 0;
+}
+
+.cards-wrapper {
+     // 内容水平居中
+    display: flex;
+    justify-content: center;
+    max-width: 1440px;
+    // 整个container水平居中
+    margin:0 auto;
+}
+
+// placeholder selector 用来复用的
+%price-card {
+    margin-right:$gutter;
+    &:last-child {
+        margin-right: 0;
+    }
+    border: 5px solid var(--clr);
+    padding: 40px 20px;
+    background-color:  #fff;
+    border-radius: 10px;
+    .fa-check {
+        color: #57cc99;
+    }
+    .fa-times {
+        color: #ff0000;
+    }
+}
+
+.price-card.clr-1 {
+    @extend %price-card;
+    --clr: #{$clr-1};
+    
+    
+}
+
+.price-card.clr-2 {
+    @extend %price-card;
+    --clr: #{$clr-2}; 
+    
+}
+
+.price-card.clr-3 {
+    @extend %price-card;
+    --clr: #{$clr-3}; 
+}
+
+.price-container {
+    width: 140px;
+    height: 140px;
+    background-color:  $clr-1;
+    border-radius: 50%;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.align-center {
+    text-align:  center;
+}
+
+.btn {
+     display: inline-block;
+     margin-top: 45px;
+     padding: 10px 20px;
+     border:  3px solid var(--clr);
+     text-decoration: none;
+     font-size:  18px;
+     color: var(--clr);
+     transition: all 0.3s;
+
+     &:hover {
+        color: #fff;
+        background-color: var(--clr);
+     }
+}
+
+@media (max-width:1200px) {
+    .cards-warpper {
+        flex-wrap: wrap;
+
+    }
+
+    .price-card {
+        width: calc (50% - var(--gutter));
+
+        &:nth-child(2) {
+            margin-right: 0;
+        }
+
+        &:last-child {
+margin-top: var(--gutter);
+        }   
+     }
+}
+
+
+@media (max-width:768px) {
+    .cards-wrapper {
+        flex-direction: column;
+        align-items: content;
+        width: 90%;
+    }
+        .price-card {
+            width: 100%;
+
+            &:first-child {
+                margin-right: 0;
+            }
+            &:last-child {
+                margin-top: 0;
+            }
+            &:not(:last-child) {
+                margin-bottom: var(--gutter);
+            }
+        }
+   
+}
