@@ -47,6 +47,7 @@ body {
     }
 }
 
+
 .price-card.clr-1 {
     @extend %price-card;
     --clr: #{$clr-1};
@@ -117,7 +118,7 @@ margin-top: var(--gutter);
      }
 }
 
-
+// code for responsive 
 @media (max-width:768px) {
     .cards-wrapper {
         flex-direction: column;
