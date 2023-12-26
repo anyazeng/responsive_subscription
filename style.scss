@@ -1,12 +1,12 @@
-$gutter:30px;
+$gutter: 30px;
 $primary-font: "Poppins", sans-serif;
-$background-color:#fefefe;
-$clr-1:#ffb139;
-$clr-2:#6f69ac;
-$clr-3:#80ed99;
+$background-color: #fefefe;
+$clr-1: #ffb139;
+$clr-2: #6f69ac;
+$clr-3: #80ed99;
 
 * {
-    margin:0;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
@@ -21,125 +21,190 @@ body {
 }
 
 .cards-wrapper {
-     // 内容水平居中
+    // 内容水平居中
     display: flex;
     justify-content: center;
     max-width: 1440px;
     // 整个container水平居中
-    margin:0 auto;
+    margin: 0 auto;
 }
 
 // placeholder selector 用来复用的
 %price-card {
-    margin-right:$gutter;
+    margin-right: $gutter;
+
     &:last-child {
         margin-right: 0;
     }
+
     border: 5px solid var(--clr);
     padding: 40px 20px;
-    background-color:  #fff;
+    background-color: #fff;
     border-radius: 10px;
+
     .fa-check {
         color: #57cc99;
     }
+
     .fa-times {
         color: #ff0000;
     }
 }
 
-
 .price-card.clr-1 {
     @extend %price-card;
     --clr: #{$clr-1};
-    
-    
 }
 
 .price-card.clr-2 {
     @extend %price-card;
-    --clr: #{$clr-2}; 
-    
+    --clr: #{$clr-2};
 }
 
 .price-card.clr-3 {
     @extend %price-card;
-    --clr: #{$clr-3}; 
+    --clr: #{$clr-3};
 }
 
 .price-container {
-    width: 140px;
-    height: 140px;
-    background-color:  $clr-1;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
+    background-color: var(--clr);
     font-weight: bold;
     color: #fff;
+    //让这个container在页面上下左右居中
     display: flex;
     justify-content: center;
     align-items: center;
+    //让内容在container里面居中
     margin: 0 auto;
+    box-shadow: 0 0 0 5px #fff, 0 0 0 10px var(--clr);
+}
+
+
+
+.price {
+    display: flex;
+    span:first-child {
+        font-size: 20px;
+    }
+    span:last-child {
+        font-size: 40px;
+    }
+}
+
+.plan {
+    margin: 30px 0;
+    text-transform: capitalize;
+    font-size: 30px;
+    color: #000;
+    text-align: center;
+    position: relative;
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 1px;
+        background-color: var(--clr);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    span {
+        background-color: #fff;
+        position: relative;
+        z-index: 1;
+        padding: 0 20px;
+    }
+}
+
+.deliverables-wrapper {
+    list-style: none;
+}
+
+.deliverable {
+    display: flex;
+    justify-content: space-between;
+    //另外一条抽居中
+    align-items: center;
+    font-size: 18px;
+
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }    
+
+    span:first-child {
+        margin-right: 15px;
+        text-transform: capitalize;
+        color:#333;
+    }
 }
 
 .align-center {
-    text-align:  center;
+    text-align: center;
 }
 
+//这个btn本身是a标签，是个inline，如果设置padding margin的话，垂直方向不生效，所以要变成inline-block
 .btn {
-     display: inline-block;
-     margin-top: 45px;
-     padding: 10px 20px;
-     border:  3px solid var(--clr);
-     text-decoration: none;
-     font-size:  18px;
-     color: var(--clr);
-     transition: all 0.3s;
+    display: inline-block;
+    margin-top: 45px;
+    padding: 10px 20px;
+    border: 3px solid var(--clr);
+    //去掉a标签的下划线
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--clr);
+    transition: all 0.3s;
 
-     &:hover {
+    &:hover {
         color: #fff;
         background-color: var(--clr);
-     }
-}
-// test comments
-@media (max-width:1200px) {
-    .cards-warpper {
-        flex-wrap: wrap;
-
     }
+}
 
+//responsive设定 当屏幕宽度<=200px 
+@media (max-width:1200px) {
+    .cards-wrapper {
+        flex-wrap: wrap;
+    }
+    //一行两张卡片后，第二张卡片的右边就不需要margin right了
+    //每张卡片的宽度是30%-30px
     .price-card {
-        width: calc (50% - var(--gutter));
-
+        //这里不是很明白
+        width: calc (50% - $gutter);
         &:nth-child(2) {
             margin-right: 0;
         }
-
         &:last-child {
-margin-top: var(--gutter);
-        }   
-     }
+            margin-top: $gutter;
+        }
+    }
 }
 
-// code for test 
-// code for test main 2
-// test comment
-// test2 comment
+
 @media (max-width:768px) {
     .cards-wrapper {
         flex-direction: column;
         align-items: content;
         width: 90%;
     }
-        .price-card {
-            width: 100%;
+    .price-card {
+        width: 100%;
 
-            &:first-child {
-                margin-right: 0;
-            }
-            &:last-child {
-                margin-top: 0;
-            }
-            &:not(:last-child) {
-                margin-bottom: var(--gutter);
-            }
+        &:first-child {
+            margin-right: 0;
         }
-   
+
+        &:last-child {
+            margin-top: 0;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: $gutter;
+        }
+    }
+
 }
